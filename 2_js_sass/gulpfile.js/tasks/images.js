@@ -1,0 +1,13 @@
+var changed     = require('gulp-changed');
+var config      = require('../config').images;
+var gulp        = require('gulp');
+var imagemin    = require('gulp-imagemin');
+var reload  	= require('browser-sync').reload;
+
+gulp.task('images', function() {
+	return gulp.src(config.src)
+		.pipe(changed(config.dest))			// Ignore unchanged files
+		.pipe(imagemin())					// Optimize
+		.pipe(gulp.dest(config.dest))
+		.pipe(reload({stream:true}));
+});
