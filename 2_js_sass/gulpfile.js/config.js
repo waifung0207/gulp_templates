@@ -20,22 +20,37 @@ module.exports = {
   browserSync: {
     server: {
       baseDir: dir_public
-    },
-    files: [dir_public + '/**/*.html']
+    }
   },
 
-  // imagemin
-  images: {
-    src: dir_src + "/images/**",
-    dest: dir_public + "/dist/images"
+  // uglify (js)
+  uglify: {
+    src: [
+      dir_bower + "/jquery/dist/jquery.min.js",
+      dir_src + "/js/**/*.js"
+    ],
+    dest: dir_dist,
+    dest_file: "app.min.js",
+    settings: {
+      outSourceMap: true
+    }
   },
 
   // sass
   sass: {
     src: dir_src + "/scss/**/*.scss",
     dest: dir_dist,
+    dest_file: "app.min.css",
     settings: {
+      outputStyle: 'compressed',
       imagePath: 'images' // Used by the image-url helper
     }
+  },
+
+  // imagemin
+  images: {
+    src: dir_src + "/images/**",
+    dest: dir_public + "/dist/images"
   }
+
 };
